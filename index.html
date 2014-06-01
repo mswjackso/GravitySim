@@ -1,0 +1,53 @@
+<html>
+
+	<head>
+		<title>Gravity Simulation</title>
+		<script src="libs/jquery-1.11.0.min.js" type="text/javascript"></script>
+		<script src="libs/gravity.js" type="text/javascript"></script>
+		<script src="libs/particle.js" type="text/javascript"></script>
+	</head>
+	
+	<body>
+		
+    <canvas id="world" width="6350" height="5600">
+      Your browser does not support HTML5.
+    </canvas>
+    
+	</body>
+</html>
+
+<script>
+	
+  //Initiate world
+  var world = {};
+  world.fps = 240;
+  world.canvas = document.getElementById("world");
+  world.context = world.canvas.getContext("2d");
+  world.objects = [];
+  
+  //Declare constants
+  var termVel = 20;
+  
+  //Push current objects
+  world.objects.push(new Particle(3175, 2800, 200, 200,  0,  0, 1000000, "#ffff00"));
+  world.objects.push(new Particle(3175, 1600, 100, 100,  7,  0, 10000, "#ff0000"));
+  world.objects.push(new Particle(3270, 2750, 10, 10,  5,  0, 100, "#0000ff"));
+  world.objects.push(new Particle(3220, 1575, 10, 10, 8, 0, 100, "#00ff00"));
+  
+  var counter = 0;
+  
+  function tick(){
+    
+    //Blank the screen
+    world.context.fillStyle = "black";
+    //world.context.fillRect(0,0, world.canvas.width, world.canvas.height);
+    
+    //Update all objects in the world
+    for(var i=0; i<world.objects.length; i++)
+      world.objects[i].update();
+    
+  };
+  window.setInterval(tick, 1000/world.fps);
+  
+</script>
+
